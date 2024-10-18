@@ -1,412 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Phenotypic Age Calculator</title>
-    <!-- Bootstrap 5 CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css" />
-  </head>
 
-  <body>
-    <div class="container mt-5 mb-5">
-      <div class="card shadow-lg p-4">
-        <h1 class="text-center mb-4">Phenotypic Age Calculator</h1>
-        <!-- Display results here -->
-        <div id="result" class="mt-4 row" style="display: none">
-          <div class="col-md-6">
-            <h2>TEST RESULTS</h2>
-            <p>
-              <strong>Phenotypic Age:</strong> <span id="phenotypic-age"></span>
-            </p>
-            <p>
-              <strong>Chronological Age:</strong>
-              <span id="chronological-age"></span>
-            </p>
-            <p>
-              <strong>Difference:</strong> <span id="age-difference"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <img src="thumb.webp" alt="Age Progression" class="img-fluid" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phenotypic Age Calculator</title>
+  <meta property="og:image" content="thumb.webp" />
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container mt-5 mb-5">
+    <div class="card shadow-lg p-4">
+      <h1 class="text-center mb-4">Phenotypic Age Calculator</h1>
+      <!-- Display results here -->
+      <div id="result" class="mt-4 row" style="display: none">
+        <div class="col-md-6">
+          <h2>TEST RESULTS</h2>
+          <p>
+            <strong>Phenotypic Age:</strong> <span id="phenotypic-age"></span>
+          </p>
+          <p>
+            <strong>Chronological Age:</strong>
+            <span id="chronological-age"></span>
+          </p>
+          <p>
+            <strong>Difference:</strong> <span id="age-difference"></span>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <img src="thumb.webp" alt="Age Progression" class="img-fluid" />
+        </div>
+      </div>
+      <form id="biological-age-form" class="row g-3">
+        <div class="col-md-6">
+          <label for="dob" class="form-label">DATE OF BIRTH</label>
+          <input type="date" id="dob" name="dob" value="2024-10-10" class="form-control" required />
+        </div>
+
+        <div class="col-md-6">
+          <label for="blood-test-date" class="form-label">DATE OF BLOOD TEST</label>
+          <input type="date" id="blood-test-date" name="blood-test-date" value="2024-10-23" class="form-control"
+            required />
+        </div>
+
+        <h2 class="mt-4 mb-3">BLOOD TEST RESULTS</h2>
+
+        <!-- Albumin -->
+        <div class="col-md-6">
+          <label for="albumin" class="form-label"> Albumin </label>
+          <small id="hs_albumin">(-0.0336)</small>
+          <div class="input-group">
+            <input type="number" id="albumin" name="albumin" value="3" step="0.1" class="form-control" />
+            <span class="input-group-text">g/dL</span>
           </div>
         </div>
-        <form id="biological-age-form" class="row g-3">
-          <div class="col-md-6">
-            <label for="dob" class="form-label">DATE OF BIRTH</label>
-            <input
-              type="date"
-              id="dob"
-              name="dob"
-              value="2024-10-10"
-              class="form-control"
-              required
-            />
-          </div>
 
-          <div class="col-md-6">
-            <label for="blood-test-date" class="form-label"
-              >DATE OF BLOOD TEST</label
-            >
-            <input
-              type="date"
-              id="blood-test-date"
-              name="blood-test-date"
-              value="2024-10-23"
-              class="form-control"
-              required
-            />
+        <!-- Creatinine -->
+        <div class="col-md-6">
+          <label for="creatinine" class="form-label">Creatinine</label>
+          <small id="hs_creatinine">(0.0095)</small>
+          <div class="input-group">
+            <input type="number" id="creatinine" name="creatinine" value="2" step="0.1" class="form-control" />
+            <span class="input-group-text">mg/dL</span>
           </div>
+        </div>
 
-          <h2 class="mt-4 mb-3">BLOOD TEST RESULTS</h2>
-
-          <!-- Albumin -->
-          <div class="col-md-6">
-            <label for="albumin" class="form-label"> Albumin </label>
-            <small id="hs_albumin">(-0.0336)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="albumin"
-                name="albumin"
-                value="3"
-                step="0.1"
-                class="form-control"
-              />
-              <span class="input-group-text">g/dL</span>
-            </div>
+        <!-- Glucose -->
+        <div class="col-md-6">
+          <label for="glucose" class="form-label">Glucose</label>
+          <small id="hs_glucose">(0.0190)</small>
+          <div class="input-group">
+            <input type="number" id="glucose" name="glucose" value="50" step="1" class="form-control" />
+            <span class="input-group-text">mg/dL</span>
           </div>
+        </div>
 
-          <!-- Creatinine -->
-          <div class="col-md-6">
-            <label for="creatinine" class="form-label">Creatinine</label>
-            <small id="hs_creatinine">(0.0095)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="creatinine"
-                name="creatinine"
-                value="2"
-                step="0.1"
-                class="form-control"
-              />
-              <span class="input-group-text">mg/dL</span>
-            </div>
+        <!-- C-reactive Protein -->
+        <div class="col-md-6">
+          <label for="crp" class="form-label">C-reactive Protein (CRP)</label>
+          <small id="hs_crp">(0.0954)</small>
+          <div class="input-group">
+            <input type="number" id="crp" name="crp" value="3" step="0.1" class="form-control" />
+            <span class="input-group-text">mg/L</span>
           </div>
+        </div>
 
-          <!-- Glucose -->
-          <div class="col-md-6">
-            <label for="glucose" class="form-label">Glucose</label>
-            <small id="hs_glucose">(0.0190)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="glucose"
-                name="glucose"
-                value="50"
-                step="1"
-                class="form-control"
-              />
-              <span class="input-group-text">mg/dL</span>
-            </div>
+        <!-- Lymphocyte -->
+        <div class="col-md-6">
+          <label for="lymphs" class="form-label">Lymphocyte (Lymphs)</label>
+          <small id="hs_lymphs">(-0.0126)</small>
+          <div class="input-group">
+            <input type="number" id="lymphs" name="lymphs" value="34" step="0.1" class="form-control" />
+            <span class="input-group-text">%</span>
           </div>
+        </div>
 
-          <!-- C-reactive Protein -->
-          <div class="col-md-6">
-            <label for="crp" class="form-label">C-reactive Protein (CRP)</label>
-            <small id="hs_crp">(0.0954)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="crp"
-                name="crp"
-                value="3"
-                step="0.1"
-                class="form-control"
-              />
-              <span class="input-group-text">mg/L</span>
-            </div>
+        <!-- MCV -->
+        <div class="col-md-6">
+          <label for="mcv" class="form-label">Mean Cell Volume (MCV)</label>
+          <small id="hs_mcv">(0.0260)</small>
+          <div class="input-group">
+            <input type="number" id="mcv" name="mcv" value="111" step="1" class="form-control" />
+            <span class="input-group-text">fL</span>
           </div>
+        </div>
 
-          <!-- Lymphocyte -->
-          <div class="col-md-6">
-            <label for="lymphs" class="form-label">Lymphocyte (Lymphs)</label>
-            <small id="hs_lymphs">(-0.0126)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="lymphs"
-                name="lymphs"
-                value="34"
-                step="0.1"
-                class="form-control"
-              />
-              <span class="input-group-text">%</span>
-            </div>
+        <!-- RDW -->
+        <div class="col-md-6">
+          <label for="rdw" class="form-label">Red Cell Distribution Width (RDW)</label>
+          <small id="hs_rdw">(0.3306)</small>
+          <div class="input-group">
+            <input type="number" id="rdw" name="rdw" value="12" step="0.1" class="form-control" />
+            <span class="input-group-text">%</span>
           </div>
+        </div>
 
-          <!-- MCV -->
-          <div class="col-md-6">
-            <label for="mcv" class="form-label">Mean Cell Volume (MCV)</label>
-            <small id="hs_mcv">(0.0260)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="mcv"
-                name="mcv"
-                value="111"
-                step="1"
-                class="form-control"
-              />
-              <span class="input-group-text">fL</span>
-            </div>
+        <!-- Alkaline Phosphatase -->
+        <div class="col-md-6">
+          <label for="alkaline-phosphatase" class="form-label">Alkaline Phosphatase</label>
+          <small id="hs_alkaline-phosphatase">(0.00188)</small>
+          <div class="input-group">
+            <input type="number" id="alkaline-phosphatase" name="alkaline-phosphatase" value="1" step="0.1"
+              class="form-control" />
+            <span class="input-group-text">U/L</span>
           </div>
+        </div>
 
-          <!-- RDW -->
-          <div class="col-md-6">
-            <label for="rdw" class="form-label"
-              >Red Cell Distribution Width (RDW)</label
-            >
-            <small id="hs_rdw">(0.3306)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="rdw"
-                name="rdw"
-                value="12"
-                step="0.1"
-                class="form-control"
-              />
-              <span class="input-group-text">%</span>
-            </div>
+        <!-- White Blood Cells -->
+        <div class="col-md-6">
+          <label for="wbc" class="form-label">White Blood Cells</label>
+          <small id="hs_wbc">(0.0554)</small>
+          <div class="input-group">
+            <input type="number" id="wbc" name="wbc" value="13" step="0.1" class="form-control" />
+            <span class="input-group-text">cells/mL</span>
           </div>
+        </div>
 
-          <!-- Alkaline Phosphatase -->
-          <div class="col-md-6">
-            <label for="alkaline-phosphatase" class="form-label"
-              >Alkaline Phosphatase</label
-            >
-            <small id="hs_alkaline-phosphatase">(0.00188)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="alkaline-phosphatase"
-                name="alkaline-phosphatase"
-                value="1"
-                step="0.1"
-                class="form-control"
-              />
-              <span class="input-group-text">U/L</span>
-            </div>
-          </div>
-
-          <!-- White Blood Cells -->
-          <div class="col-md-6">
-            <label for="wbc" class="form-label">White Blood Cells</label>
-            <small id="hs_wbc">(0.0554)</small>
-            <div class="input-group">
-              <input
-                type="number"
-                id="wbc"
-                name="wbc"
-                value="13"
-                step="0.1"
-                class="form-control"
-              />
-              <span class="input-group-text">cells/mL</span>
-            </div>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="col-md-12 d-grid">
-            <button type="submit" class="btn btn-success btn-lg">
-              Calculate Results
-            </button>
-          </div>
-        </form>
-      </div>
+        <!-- Submit Button -->
+        <div class="col-md-12 d-grid">
+          <button type="submit" class="btn btn-success btn-lg">
+            Calculate Results
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <label for="blood-test-date" class="form-label"
-            >Phenotypic Age là gì</label
-          >
-          <pre>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <label for="blood-test-date" class="form-label">Phenotypic Age là gì</label>
+        <pre>
 <b>Phenotypic Age</b> là một thước đo sinh học dựa trên các chỉ số sức
 khỏe để ước lượng tuổi sinh học của một người, thay vì dựa trên tuổi
 theo năm dương lịch (tuổi theo giấy khai sinh). Khái niệm này được
 phát triển trong lĩnh vực lão khoa nhằm cung cấp một cách đo lường
 chính xác hơn về sự lão hóa sinh lý.
         </pre>
-        </div>
-        <div class="col-lg-12">
-          <label for="blood-test-date" class="form-label"
-            >Công thức tính tuổi Phenotypic Age</label
-          >
-          <pre>
-                Phenotypic Age = α + β1*biomarker1 + β2*biomarker2 + ... + βn*biomarkern </pre
-          >
-        </div>
-        <div class="col-lg-12">
-          <label for="blood-test-date" class="form-label">Trong đó</label>
-          <ul>
-            <li>α là một hằng số.</li>
-            <li>β1, β2, ..., βn là các hệ số tương ứng với từng biomarker.</li>
-            <li>
-              biomarker1, biomarker2, ..., biomarkern là các giá trị của từng
-              chỉ số sinh học.
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div class="col-lg-12">
+        <label for="blood-test-date" class="form-label">Công thức tính tuổi Phenotypic Age</label>
+        <pre>
+                Phenotypic Age = α + β1*biomarker1 + β2*biomarker2 + ... + βn*biomarkern </pre>
+      </div>
+      <div class="col-lg-12">
+        <label for="blood-test-date" class="form-label">Trong đó</label>
+        <ul>
+          <li>α là một hằng số.</li>
+          <li>β1, β2, ..., βn là các hệ số tương ứng với từng biomarker.</li>
+          <li>
+            biomarker1, biomarker2, ..., biomarkern là các giá trị của từng
+            chỉ số sinh học.
+          </li>
+        </ul>
+      </div>
 
-        <div class="col-lg-12">
-          <label for="blood-test-date" class="form-label">Giả định</label>
-          <ul>
-            <li>α (hằng số): <b>19.5</b></li>
-            <li>
-              Các hệ số giả định được viết ở bên cạnh tên các chỉ số sinh học
-            </li>
-          </ul>
-        </div>
+      <div class="col-lg-12">
+        <label for="blood-test-date" class="form-label">Giả định</label>
+        <ul>
+          <li>α (hằng số): <b>19.5</b></li>
+          <li>
+            Các hệ số giả định được viết ở bên cạnh tên các chỉ số sinh học
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Custom Script -->
-    <script>
-      const hs_alpha = 19.5;
+  <!-- Custom Script -->
+  <script>
+    const hs_alpha = 19.5;
 
-      $(document).ready(function () {
-        $("#biological-age-form").submit(function (e) {
-          e.preventDefault();
-          debugger;
-          // Lấy giá trị của các input
-          let dob = $("#dob").val(); // Lấy giá trị ngày sinh
-          let bloodTestDate = $("#blood-test-date").val(); // Lấy giá trị ngày xét nghiệm máu
+    $(document).ready(function () {
+      $("#biological-age-form").submit(function (e) {
+        e.preventDefault();
+        debugger;
+        // Lấy giá trị của các input
+        let dob = $("#dob").val(); // Lấy giá trị ngày sinh
+        let bloodTestDate = $("#blood-test-date").val(); // Lấy giá trị ngày xét nghiệm máu
 
-          let albumin = $("#albumin").val(); // Lấy giá trị Albumin
-          let creatinine = $("#creatinine").val(); // Lấy giá trị Creatinine
-          let glucose = $("#glucose").val(); // Lấy giá trị Glucose
-          let crp = $("#crp").val(); // Lấy giá trị C-reactive Protein (CRP)
-          let lymphs = $("#lymphs").val(); // Lấy giá trị Lymphocyte (Lymphs)
-          let mcv = $("#mcv").val(); // Lấy giá trị Mean Cell Volume (MCV)
-          let rdw = $("#rdw").val(); // Lấy giá trị Red Cell Distribution Width (RDW)
-          let alkalinePhosphatase = $("#alkaline-phosphatase").val(); // Lấy giá trị Alkaline Phosphatase
-          let whiteBloodCells = $("#wbc").val(); // Lấy giá trị White Blood Cells
+        let albumin = $("#albumin").val(); // Lấy giá trị Albumin
+        let creatinine = $("#creatinine").val(); // Lấy giá trị Creatinine
+        let glucose = $("#glucose").val(); // Lấy giá trị Glucose
+        let crp = $("#crp").val(); // Lấy giá trị C-reactive Protein (CRP)
+        let lymphs = $("#lymphs").val(); // Lấy giá trị Lymphocyte (Lymphs)
+        let mcv = $("#mcv").val(); // Lấy giá trị Mean Cell Volume (MCV)
+        let rdw = $("#rdw").val(); // Lấy giá trị Red Cell Distribution Width (RDW)
+        let alkalinePhosphatase = $("#alkaline-phosphatase").val(); // Lấy giá trị Alkaline Phosphatase
+        let whiteBloodCells = $("#wbc").val(); // Lấy giá trị White Blood Cells
 
-          // lấy các hệ số
-          let hs_albumin = convert_hs($("#hs_albumin").text());
-          let hs_creatinine = convert_hs($("#hs_creatinine").text());
-          let hs_glucose = convert_hs($("#hs_glucose").text());
-          let hs_crp = convert_hs($("#hs_crp").text());
-          let hs_lymphs = convert_hs($("#hs_lymphs").text());
-          let hs_mcv = convert_hs($("#hs_mcv").text());
-          let hs_rdw = convert_hs($("#hs_rdw").text());
-          let hs_alkalinePhosphatase = convert_hs(
-            $("#hs_alkaline-phosphatase").text()
-          );
-          let hs_whiteBloodCells = convert_hs($("#hs_wbc").text());
+        // lấy các hệ số
+        let hs_albumin = convert_hs($("#hs_albumin").text());
+        let hs_creatinine = convert_hs($("#hs_creatinine").text());
+        let hs_glucose = convert_hs($("#hs_glucose").text());
+        let hs_crp = convert_hs($("#hs_crp").text());
+        let hs_lymphs = convert_hs($("#hs_lymphs").text());
+        let hs_mcv = convert_hs($("#hs_mcv").text());
+        let hs_rdw = convert_hs($("#hs_rdw").text());
+        let hs_alkalinePhosphatase = convert_hs(
+          $("#hs_alkaline-phosphatase").text()
+        );
+        let hs_whiteBloodCells = convert_hs($("#hs_wbc").text());
 
-          // Tính toán giả định - Bạn cần thay thế phần này bằng code backend thực sự
-          var phenotypicAge = 0; // Ví dụ giá trị Phenotypic Age
-          var chronologicalAge = 0; // Ví dụ giá trị Chronological Age
+        // Tính toán giả định - Bạn cần thay thế phần này bằng code backend thực sự
+        var phenotypicAge = 0; // Ví dụ giá trị Phenotypic Age
+        var chronologicalAge = 0; // Ví dụ giá trị Chronological Age
 
-          phenotypicAge = hs_alpha;
-          if (albumin > 0) {
-            phenotypicAge = phenotypicAge + hs_albumin * albumin;
-          }
-
-          if (creatinine > 0) {
-            phenotypicAge = phenotypicAge + hs_creatinine * creatinine;
-          }
-
-          if (glucose > 0) {
-            phenotypicAge = phenotypicAge + hs_glucose * glucose;
-          }
-
-          if (crp > 0) {
-            phenotypicAge = phenotypicAge + hs_crp * crp;
-          }
-
-          if (lymphs > 0) {
-            phenotypicAge = phenotypicAge + hs_lymphs * lymphs;
-          }
-
-          if (mcv > 0) {
-            phenotypicAge = phenotypicAge + hs_mcv * mcv;
-          }
-
-          if (rdw > 0) {
-            phenotypicAge = phenotypicAge + hs_rdw * rdw;
-          }
-
-          if (alkalinePhosphatase > 0) {
-            phenotypicAge =
-              phenotypicAge + hs_alkalinePhosphatase * alkalinePhosphatase;
-          }
-
-          if (whiteBloodCells > 0) {
-            phenotypicAge =
-              phenotypicAge + hs_whiteBloodCells * whiteBloodCells;
-          }
-
-          chronologicalAge = calculateChronologicalAge(dob);
-
-          var difference = phenotypicAge - chronologicalAge; // Tính Difference
-
-          // Hiển thị kết quả
-          $("#phenotypic-age").text(phenotypicAge.toFixed(2));
-          $("#chronological-age").text(chronologicalAge.toFixed(2));
-          $("#age-difference").text(difference.toFixed(2));
-
-          // Hiển thị div chứa kết quả
-          $("#result").show();
-          scrollToTop();
-        });
-      });
-      function scrollToTop() {
-        window.scrollTo(0, 0);
-      }
-
-      function convert_hs(hs_string) {
-        let hsString = hs_string;
-        hsString = hsString.replace("(", "");
-        hsString = hsString.replace(")", "");
-
-        hsString = parseFloat(hsString);
-
-        return hsString;
-      }
-
-      function calculateChronologicalAge(birthDate) {
-        const today = new Date(); // Lấy ngày hiện tại
-        const birth = new Date(birthDate); // Chuyển đổi birthDate sang kiểu Date
-
-        let age = today.getFullYear() - birth.getFullYear(); // Tính tuổi
-        const monthDifference = today.getMonth() - birth.getMonth(); // Tính sự khác biệt tháng
-
-        // Nếu tháng hiện tại chưa đến tháng sinh hoặc tháng hiện tại là tháng sinh nhưng chưa đến ngày sinh, giảm tuổi đi 1
-        if (
-          monthDifference < 0 ||
-          (monthDifference === 0 && today.getDate() < birth.getDate())
-        ) {
-          age--;
+        phenotypicAge = hs_alpha;
+        if (albumin > 0) {
+          phenotypicAge = phenotypicAge + hs_albumin * albumin;
         }
 
-        return age;
+        if (creatinine > 0) {
+          phenotypicAge = phenotypicAge + hs_creatinine * creatinine;
+        }
+
+        if (glucose > 0) {
+          phenotypicAge = phenotypicAge + hs_glucose * glucose;
+        }
+
+        if (crp > 0) {
+          phenotypicAge = phenotypicAge + hs_crp * crp;
+        }
+
+        if (lymphs > 0) {
+          phenotypicAge = phenotypicAge + hs_lymphs * lymphs;
+        }
+
+        if (mcv > 0) {
+          phenotypicAge = phenotypicAge + hs_mcv * mcv;
+        }
+
+        if (rdw > 0) {
+          phenotypicAge = phenotypicAge + hs_rdw * rdw;
+        }
+
+        if (alkalinePhosphatase > 0) {
+          phenotypicAge =
+            phenotypicAge + hs_alkalinePhosphatase * alkalinePhosphatase;
+        }
+
+        if (whiteBloodCells > 0) {
+          phenotypicAge =
+            phenotypicAge + hs_whiteBloodCells * whiteBloodCells;
+        }
+
+        chronologicalAge = calculateChronologicalAge(dob);
+
+        var difference = phenotypicAge - chronologicalAge; // Tính Difference
+
+        // Hiển thị kết quả
+        $("#phenotypic-age").text(phenotypicAge.toFixed(2));
+        $("#chronological-age").text(chronologicalAge.toFixed(2));
+        $("#age-difference").text(difference.toFixed(2));
+
+        // Hiển thị div chứa kết quả
+        $("#result").show();
+        scrollToTop();
+      });
+    });
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+
+    function convert_hs(hs_string) {
+      let hsString = hs_string;
+      hsString = hsString.replace("(", "");
+      hsString = hsString.replace(")", "");
+
+      hsString = parseFloat(hsString);
+
+      return hsString;
+    }
+
+    function calculateChronologicalAge(birthDate) {
+      const today = new Date(); // Lấy ngày hiện tại
+      const birth = new Date(birthDate); // Chuyển đổi birthDate sang kiểu Date
+
+      let age = today.getFullYear() - birth.getFullYear(); // Tính tuổi
+      const monthDifference = today.getMonth() - birth.getMonth(); // Tính sự khác biệt tháng
+
+      // Nếu tháng hiện tại chưa đến tháng sinh hoặc tháng hiện tại là tháng sinh nhưng chưa đến ngày sinh, giảm tuổi đi 1
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birth.getDate())
+      ) {
+        age--;
       }
-    </script>
-  </body>
+
+      return age;
+    }
+  </script>
+</body>
+
 </html>
