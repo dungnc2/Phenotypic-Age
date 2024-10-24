@@ -14,8 +14,8 @@
 </head>
 
 <body>
-  <div class="container mt-5 mb-5">
-    <div class="card shadow-lg p-4">
+  <div class="container mt-5 mb-5 row">
+    <div class="card shadow-lg p-4 col-lg-6">
       <h1 class="text-center mb-4">Phenotypic Age Calculator</h1>
       <!-- Display results here -->
       <div id="result" class="mt-4 row" style="display: none">
@@ -141,6 +141,17 @@
           </div>
         </div>
 
+        <!-- White Blood Cells -->
+        <div class="col-md-6">
+          <label for="wbc" class="form-label">Select Formula</label>
+          <div class="input-group">
+            <select class="form-control" name="formula" id="formula">
+              <option value="0">ChatGPT</option>
+              <option value="1">Papper</option>
+            </select>
+          </div>
+        </div>
+
         <!-- Submit Button -->
         <div class="col-md-12 d-grid">
           <button type="submit" class="btn btn-success btn-lg">
@@ -149,24 +160,20 @@
         </div>
       </form>
     </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
+    <div class="row col-lg-6 px-4">
       <div class="col-lg-12">
         <label for="blood-test-date" class="form-label">Phenotypic Age là gì</label>
         <pre>
-<b>Phenotypic Age</b> là một thước đo sinh học dựa trên các chỉ số sức
-khỏe để ước lượng tuổi sinh học của một người, thay vì dựa trên tuổi
-theo năm dương lịch (tuổi theo giấy khai sinh). Khái niệm này được
-phát triển trong lĩnh vực lão khoa nhằm cung cấp một cách đo lường
-chính xác hơn về sự lão hóa sinh lý.
-        </pre>
+  <b>Phenotypic Age</b> là một thước đo sinh học dựa trên các chỉ số sức
+  khỏe để ước lượng tuổi sinh học của một người, thay vì dựa trên tuổi
+  theo năm dương lịch (tuổi theo giấy khai sinh). Khái niệm này được
+  phát triển trong lĩnh vực lão khoa nhằm cung cấp một cách đo lường
+  chính xác hơn về sự lão hóa sinh lý.
+          </pre>
       </div>
       <div class="col-lg-12">
         <label for="blood-test-date" class="form-label">Công thức tính tuổi Phenotypic Age</label>
-        <pre>
-                Phenotypic Age = α + β1*biomarker1 + β2*biomarker2 + ... + βn*biomarkern </pre>
+        <pre>Phenotypic Age = α + β1*biomarker1 + β2*biomarker2 + ... + βn*biomarkern </pre>
       </div>
       <div class="col-lg-12">
         <label for="blood-test-date" class="form-label">Trong đó</label>
@@ -179,7 +186,6 @@ chính xác hơn về sự lão hóa sinh lý.
           </li>
         </ul>
       </div>
-
       <div class="col-lg-12">
         <label for="blood-test-date" class="form-label">Giả định</label>
         <ul>
@@ -192,6 +198,7 @@ chính xác hơn về sự lão hóa sinh lý.
     </div>
   </div>
 
+
   <!-- Bootstrap JS and Popper.js -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
@@ -200,85 +207,57 @@ chính xác hơn về sự lão hóa sinh lý.
 
   <!-- Custom Script -->
   <script>
-    const hs_alpha = 19.5;
+
+    let hs_gpt = {
+      'alpha': 19.5,
+      'albumin': -0.0336,
+      'creatinine': 0.0095,
+      'glucose': 0.0190,
+      'crp': 0.0954,
+      'lymphs': -0.0126,
+      'mcv': 0.0260,
+      'rdw': 0.3306,
+      'alkalinePhosphatase': 0.00188,
+      'whiteBloodCells': 0.0554,
+    };
+    let hs_papper = {
+      'alpha': -19.907,
+      'albumin': -0.0336,
+      'creatinine': 0.0095,
+      'glucose': 0.1953,
+      'crp': 0.0954,
+      'lymphs': -0.0120,
+      'mcv': 0.0268,
+      'rdw': 0.3306,
+      'alkalinePhosphatase': 0.00188,
+      'whiteBloodCells': 0.0554,
+      'chronologicalAge': 0.0804,
+    };
 
     $(document).ready(function () {
+
+
       $("#biological-age-form").submit(function (e) {
         e.preventDefault();
-        debugger;
-        // Lấy giá trị của các input
-        let dob = $("#dob").val(); // Lấy giá trị ngày sinh
-        let bloodTestDate = $("#blood-test-date").val(); // Lấy giá trị ngày xét nghiệm máu
-
-        let albumin = $("#albumin").val(); // Lấy giá trị Albumin
-        let creatinine = $("#creatinine").val(); // Lấy giá trị Creatinine
-        let glucose = $("#glucose").val(); // Lấy giá trị Glucose
-        let crp = $("#crp").val(); // Lấy giá trị C-reactive Protein (CRP)
-        let lymphs = $("#lymphs").val(); // Lấy giá trị Lymphocyte (Lymphs)
-        let mcv = $("#mcv").val(); // Lấy giá trị Mean Cell Volume (MCV)
-        let rdw = $("#rdw").val(); // Lấy giá trị Red Cell Distribution Width (RDW)
-        let alkalinePhosphatase = $("#alkaline-phosphatase").val(); // Lấy giá trị Alkaline Phosphatase
-        let whiteBloodCells = $("#wbc").val(); // Lấy giá trị White Blood Cells
-
-        // lấy các hệ số
-        let hs_albumin = convert_hs($("#hs_albumin").text());
-        let hs_creatinine = convert_hs($("#hs_creatinine").text());
-        let hs_glucose = convert_hs($("#hs_glucose").text());
-        let hs_crp = convert_hs($("#hs_crp").text());
-        let hs_lymphs = convert_hs($("#hs_lymphs").text());
-        let hs_mcv = convert_hs($("#hs_mcv").text());
-        let hs_rdw = convert_hs($("#hs_rdw").text());
-        let hs_alkalinePhosphatase = convert_hs(
-          $("#hs_alkaline-phosphatase").text()
-        );
-        let hs_whiteBloodCells = convert_hs($("#hs_wbc").text());
-
         // Tính toán giả định - Bạn cần thay thế phần này bằng code backend thực sự
-        var phenotypicAge = 0; // Ví dụ giá trị Phenotypic Age
-        var chronologicalAge = 0; // Ví dụ giá trị Chronological Age
+        let phenotypicAge = 0; // Ví dụ giá trị Phenotypic Age
+        let chronologicalAge = 0; // Ví dụ giá trị Chronological Age
 
-        phenotypicAge = hs_alpha;
-        if (albumin > 0) {
-          phenotypicAge = phenotypicAge + hs_albumin * albumin;
+        chronologicalAge = calculateChronologicalAge();
+        let formula = parseInt($("#formula").val());
+
+        switch (formula) {
+          case 0:
+            phenotypicAge = calculatePhenotypicAgeGPT();
+            break;
+          case 1:
+            phenotypicAge = calculatePhenotypicAgePapper(chronologicalAge);
+            break;
+          default:
+            break;
         }
 
-        if (creatinine > 0) {
-          phenotypicAge = phenotypicAge + hs_creatinine * creatinine;
-        }
-
-        if (glucose > 0) {
-          phenotypicAge = phenotypicAge + hs_glucose * glucose;
-        }
-
-        if (crp > 0) {
-          phenotypicAge = phenotypicAge + hs_crp * crp;
-        }
-
-        if (lymphs > 0) {
-          phenotypicAge = phenotypicAge + hs_lymphs * lymphs;
-        }
-
-        if (mcv > 0) {
-          phenotypicAge = phenotypicAge + hs_mcv * mcv;
-        }
-
-        if (rdw > 0) {
-          phenotypicAge = phenotypicAge + hs_rdw * rdw;
-        }
-
-        if (alkalinePhosphatase > 0) {
-          phenotypicAge =
-            phenotypicAge + hs_alkalinePhosphatase * alkalinePhosphatase;
-        }
-
-        if (whiteBloodCells > 0) {
-          phenotypicAge =
-            phenotypicAge + hs_whiteBloodCells * whiteBloodCells;
-        }
-
-        chronologicalAge = calculateChronologicalAge(dob);
-
-        var difference = phenotypicAge - chronologicalAge; // Tính Difference
+        let difference = phenotypicAge - chronologicalAge; // Tính Difference
 
         // Hiển thị kết quả
         $("#phenotypic-age").text(phenotypicAge.toFixed(2));
@@ -290,6 +269,7 @@ chính xác hơn về sự lão hóa sinh lý.
         scrollToTop();
       });
     });
+
     function scrollToTop() {
       window.scrollTo(0, 0);
     }
@@ -304,7 +284,8 @@ chính xác hơn về sự lão hóa sinh lý.
       return hsString;
     }
 
-    function calculateChronologicalAge(birthDate) {
+    function calculateChronologicalAge() {
+      let birthDate = $("#dob").val();
       const today = new Date(); // Lấy ngày hiện tại
       const birth = new Date(birthDate); // Chuyển đổi birthDate sang kiểu Date
 
@@ -320,6 +301,65 @@ chính xác hơn về sự lão hóa sinh lý.
       }
 
       return age;
+    }
+
+    function calculatePhenotypicAgeGPT() {
+      // Lấy giá trị của các input
+      let albumin = $("#albumin").val(); // Lấy giá trị Albumin
+      let creatinine = $("#creatinine").val(); // Lấy giá trị Creatinine
+      let glucose = $("#glucose").val(); // Lấy giá trị Glucose
+      let crp = $("#crp").val(); // Lấy giá trị C-reactive Protein (CRP)
+      let lymphs = $("#lymphs").val(); // Lấy giá trị Lymphocyte (Lymphs)
+      let mcv = $("#mcv").val(); // Lấy giá trị Mean Cell Volume (MCV)
+      let rdw = $("#rdw").val(); // Lấy giá trị Red Cell Distribution Width (RDW)
+      let alkalinePhosphatase = $("#alkaline-phosphatase").val(); // Lấy giá trị Alkaline Phosphatase
+      let whiteBloodCells = $("#wbc").val(); // Lấy giá trị White Blood Cells
+      // Công thức tính tuổi sinh học
+      return hs_gpt.alpha +
+        hs_gpt.albumin * albumin +
+        hs_gpt.creatinine * creatinine +
+        hs_gpt.glucose * glucose +
+        hs_gpt.crp * crp +
+        hs_gpt.lymphs * lymphs +
+        hs_gpt.mcv * mcv +
+        hs_gpt.rdw * rdw +
+        hs_gpt.alkalinePhosphatase * alkalinePhosphatase +
+        hs_gpt.whiteBloodCells * whiteBloodCells;
+    }
+
+    function calculatePhenotypicAgePapper(chronologicalAge) {
+      // Lấy giá trị của các input
+      let dob = $("#dob").val(); // Lấy giá trị ngày sinh
+      let bloodTestDate = $("#blood-test-date").val(); // Lấy giá trị ngày xét nghiệm máu
+
+      let albumin = $("#albumin").val(); // Lấy giá trị Albumin
+      let creatinine = $("#creatinine").val(); // Lấy giá trị Creatinine
+      let glucose = $("#glucose").val(); // Lấy giá trị Glucose
+      let crp = $("#crp").val(); // Lấy giá trị C-reactive Protein (CRP)
+      let lymphs = $("#lymphs").val(); // Lấy giá trị Lymphocyte (Lymphs)
+      let mcv = $("#mcv").val(); // Lấy giá trị Mean Cell Volume (MCV)
+      let rdw = $("#rdw").val(); // Lấy giá trị Red Cell Distribution Width (RDW)
+      let alkalinePhosphatase = $("#alkaline-phosphatase").val(); // Lấy giá trị Alkaline Phosphatase
+      let whiteBloodCells = $("#wbc").val(); // Lấy giá trị White Blood Cells
+
+      let xb = hs_papper.alpha +
+        hs_papper.albumin * albumin +
+        hs_papper.creatinine * creatinine +
+        hs_papper.glucose * glucose +
+        hs_papper.crp * crp +
+        hs_papper.lymphs * lymphs +
+        hs_papper.mcv * mcv +
+        hs_papper.rdw * rdw +
+        hs_papper.alkalinePhosphatase * alkalinePhosphatase +
+        hs_papper.whiteBloodCells * whiteBloodCells +
+        hs_papper.chronologicalAge * chronologicalAge;
+
+      // Tính exp_term
+      let exp_term = (-1.51714 * Math.exp(xb)) / 0.0076927;
+      // Tính tuổi sinh học theo công thức
+      let tuoiSinhHoc = 141.50 + (Math.log(-0.00553 * Math.log(Math.exp(exp_term)))) / 0.09165;
+
+      return tuoiSinhHoc;
     }
   </script>
 </body>
