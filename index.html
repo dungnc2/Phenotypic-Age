@@ -14,28 +14,9 @@
 </head>
 
 <body>
-  <div class="container mt-5 mb-5 row">
-    <div class="card shadow-lg p-4 col-lg-6">
+  <div class="container mt-5 mb-5 row justify-content-center">
+    <div class="card shadow-sm p-4 col-lg-7">
       <h1 class="text-center mb-4">Phenotypic Age Calculator</h1>
-      <!-- Display results here -->
-      <div id="result" class="mt-4 row" style="display: none">
-        <div class="col-md-6">
-          <h2>TEST RESULTS</h2>
-          <p>
-            <strong>Phenotypic Age:</strong> <span id="phenotypic-age"></span>
-          </p>
-          <p>
-            <strong>Chronological Age:</strong>
-            <span id="chronological-age"></span>
-          </p>
-          <p>
-            <strong>Difference:</strong> <span id="age-difference"></span>
-          </p>
-        </div>
-        <div class="col-md-6">
-          <img src="thumb.webp" alt="Age Progression" class="img-fluid" />
-        </div>
-      </div>
       <form id="biological-age-form" class="row g-3">
         <div class="col-md-6">
           <label for="dob" class="form-label">DATE OF BIRTH</label>
@@ -55,9 +36,11 @@
           <label for="albumin" class="form-label"> Albumin </label>
           <small id="hs_albumin">(-0.0336)</small>
           <div class="input-group">
-            <input type="number" id="albumin" name="albumin" value="4.3" step="0.1" class="form-control" />
+            <input type="text" min="2" max="7" id="albumin" name="albumin" value="4.3" step="0.1"
+              class="form-control number-input" />
             <span class="input-group-text">g/dL</span>
           </div>
+          <i id="albumin_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- Creatinine -->
@@ -65,9 +48,11 @@
           <label for="creatinine" class="form-label">Creatinine</label>
           <small id="hs_creatinine">(0.0095)</small>
           <div class="input-group">
-            <input type="number" id="creatinine" name="creatinine" value="1" step="0.1" class="form-control" />
+            <input type="text" min="0.2" max="2" id="creatinine" name="creatinine" value="1" step="0.1"
+              class="form-control number-input" />
             <span class="input-group-text">mg/dL</span>
           </div>
+          <i id="creatinine_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- Glucose -->
@@ -75,9 +60,11 @@
           <label for="glucose" class="form-label">Glucose</label>
           <small id="hs_glucose">(0.0190)</small>
           <div class="input-group">
-            <input type="number" id="glucose" name="glucose" value="95" step="1" class="form-control" />
+            <input type="text" min="40" max="300" id="glucose" name="glucose" value="95" step="1"
+              class="form-control number-input" />
             <span class="input-group-text">mg/dL</span>
           </div>
+          <i id="glucose_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- C-reactive Protein -->
@@ -85,9 +72,11 @@
           <label for="crp" class="form-label">C-reactive Protein (CRP)</label>
           <small id="hs_crp">(0.0954)</small>
           <div class="input-group">
-            <input type="number" id="crp" name="crp" value="1" step="0.1" class="form-control" />
+            <input type="text" min="0" max="50" id="crp" name="crp" value="1" step="0.1"
+              class="form-control number-input" />
             <span class="input-group-text">mg/L</span>
           </div>
+          <i id="crp_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- Lymphocyte -->
@@ -95,9 +84,11 @@
           <label for="lymphs" class="form-label">Lymphocyte (Lymphs)</label>
           <small id="hs_lymphs">(-0.0126)</small>
           <div class="input-group">
-            <input type="number" id="lymphs" name="lymphs" value="30" step="0.1" class="form-control" />
+            <input type="text" min="0" max="100" id="lymphs" name="lymphs" value="30" step="0.1"
+              class="form-control number-input" />
             <span class="input-group-text">%</span>
           </div>
+          <i id="lymphs_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- MCV -->
@@ -105,9 +96,11 @@
           <label for="mcv" class="form-label">Mean Cell Volume (MCV)</label>
           <small id="hs_mcv">(0.0260)</small>
           <div class="input-group">
-            <input type="number" id="mcv" name="mcv" value="90" step="1" class="form-control" />
+            <input type="text" min="70" max="120" id="mcv" name="mcv" value="90" step="1"
+              class="form-control number-input" />
             <span class="input-group-text">fL</span>
           </div>
+          <i id="mcv_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- RDW -->
@@ -115,20 +108,23 @@
           <label for="rdw" class="form-label">Red Cell Distribution Width (RDW)</label>
           <small id="hs_rdw">(0.3306)</small>
           <div class="input-group">
-            <input type="number" id="rdw" name="rdw" value="13.5" step="0.1" class="form-control" />
+            <input type="text" min="10" max="20" id="rdw" name="rdw" value="13.5" step="0.1"
+              class="form-control number-input" />
             <span class="input-group-text">%</span>
           </div>
+          <i id="rdw_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- Alkaline Phosphatase -->
         <div class="col-md-6">
-          <label for="alkaline-phosphatase" class="form-label">Alkaline Phosphatase</label>
-          <small id="hs_alkaline-phosphatase">(0.00188)</small>
+          <label for="alkaline" class="form-label">Alkaline Phosphatase</label>
+          <small id="hs_alkaline">(0.00188)</small>
           <div class="input-group">
-            <input type="number" id="alkaline-phosphatase" name="alkaline-phosphatase" value="75" step="1"
-              class="form-control" />
+            <input type="text" min="0" max="200" id="alkaline" name="alkaline" value="75" step="1"
+              class="form-control number-input" />
             <span class="input-group-text">U/L</span>
           </div>
+          <i id="alkaline_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- White Blood Cells -->
@@ -136,9 +132,11 @@
           <label for="wbc" class="form-label">White Blood Cells</label>
           <small id="hs_wbc">(0.0554)</small>
           <div class="input-group">
-            <input type="number" id="wbc" name="wbc" value="7" step="1" class="form-control" />
+            <input type="text" min="2" max="20" id="wbc" name="wbc" value="7" step="1"
+              class="form-control number-input" />
             <span class="input-group-text">cells/mL</span>
           </div>
+          <i id="wbc_danger" class="text-danger view-danger d-none"></i>
         </div>
 
         <!-- White Blood Cells -->
@@ -158,9 +156,27 @@
             Calculate Results
           </button>
         </div>
-      </form>
+      </form><!-- Display results here -->
+      <div id="result" class="mt-4 row" style="display: none">
+        <div class="col-md-6">
+          <h2>TEST RESULTS</h2>
+          <p>
+            <strong>Phenotypic Age:</strong> <span id="phenotypic-age"></span>
+          </p>
+          <p>
+            <strong>Chronological Age:</strong>
+            <span id="chronological-age"></span>
+          </p>
+          <p>
+            <strong>Difference:</strong> <span id="age-difference"></span>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <img src="thumb.webp" alt="Age Progression" class="img-fluid" />
+        </div>
+      </div>
     </div>
-    <div class="row col-lg-6 px-4">
+    <!-- <div class="row col-lg-5 px-4">
       <div class="col-lg-12">
         <label for="blood-test-date" class="form-label">Phenotypic Age là gì</label>
         <pre>
@@ -195,7 +211,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
   </div>
 
 
@@ -217,7 +233,7 @@
       'lymphs': -0.0126,
       'mcv': 0.0260,
       'rdw': 0.3306,
-      'alkalinePhosphatase': 0.00188,
+      'alkaline': 0.00188,
       'whiteBloodCells': 0.0554,
     };
     let hs_papper = {
@@ -229,14 +245,21 @@
       'lymphs': -0.0120,
       'mcv': 0.0268,
       'rdw': 0.3306,
-      'alkalinePhosphatase': 0.00188,
+      'alkaline': 0.00188,
       'whiteBloodCells': 0.0554,
       'chronologicalAge': 0.0804,
     };
 
     $(document).ready(function () {
-
-
+      $(`.number-input`).on('focusout', function () {
+        validate(this.id)
+      })
+      $(`.number-input`).on('focusin', function () {
+        $(`#${this.id}_danger`).addClass('d-none')
+      })
+      $(`.number-input`).on('keyup', function () {
+        $(this).val(formatNumber($(this).val()));
+      })
       $("#biological-age-form").submit(function (e) {
         e.preventDefault();
         // Tính toán giả định - Bạn cần thay thế phần này bằng code backend thực sự
@@ -265,13 +288,27 @@
         $("#age-difference").text(difference.toFixed(2));
 
         // Hiển thị div chứa kết quả
-        $("#result").show();
-        scrollToTop();
+        let checkValidate = true;
+        $('.view-danger').each((index, item) => {
+          if (!$(item).hasClass('d-none')) {
+            checkValidate = false
+          }
+        });
+        if (checkValidate) {
+          $("#result").show();
+          scrollToBottom();
+        } else {
+          $("#result").hide();
+        }
       });
     });
 
     function scrollToTop() {
       window.scrollTo(0, 0);
+    }
+
+    function scrollToBottom() {
+      window.scrollTo(0, document.body.scrollHeight);
     }
 
     function convert_hs(hs_string) {
@@ -304,16 +341,18 @@
     }
 
     function calculatePhenotypicAgeGPT() {
+
       // Lấy giá trị của các input
-      let albumin = $("#albumin").val(); // Lấy giá trị Albumin
-      let creatinine = $("#creatinine").val(); // Lấy giá trị Creatinine
-      let glucose = $("#glucose").val(); // Lấy giá trị Glucose
-      let crp = $("#crp").val(); // Lấy giá trị C-reactive Protein (CRP)
-      let lymphs = $("#lymphs").val(); // Lấy giá trị Lymphocyte (Lymphs)
-      let mcv = $("#mcv").val(); // Lấy giá trị Mean Cell Volume (MCV)
-      let rdw = $("#rdw").val(); // Lấy giá trị Red Cell Distribution Width (RDW)
-      let alkalinePhosphatase = $("#alkaline-phosphatase").val(); // Lấy giá trị Alkaline Phosphatase
-      let whiteBloodCells = $("#wbc").val(); // Lấy giá trị White Blood Cells
+      let albumin = toOriginal($("#albumin").val()); // Lấy giá trị Albumin
+      let creatinine = toOriginal($("#creatinine").val()); // Lấy giá trị Creatinine
+      let glucose = toOriginal($("#glucose").val()); // Lấy giá trị Glucose
+      let crp = toOriginal($("#crp").val()); // Lấy giá trị C-reactive Protein (CRP)
+      let lymphs = toOriginal($("#lymphs").val()); // Lấy giá trị Lymphocyte (Lymphs)
+      let mcv = toOriginal($("#mcv").val()); // Lấy giá trị Mean Cell Volume (MCV)
+      let rdw = toOriginal($("#rdw").val()); // Lấy giá trị Red Cell Distribution Width (RDW)
+      let alkaline = toOriginal($("#alkaline").val()); // Lấy giá trị Alkaline Phosphatase
+      let whiteBloodCells = toOriginal($("#wbc").val()); // Lấy giá trị White Blood Cells
+
       // Công thức tính tuổi sinh học
       return hs_gpt.alpha +
         hs_gpt.albumin * albumin +
@@ -323,24 +362,24 @@
         hs_gpt.lymphs * lymphs +
         hs_gpt.mcv * mcv +
         hs_gpt.rdw * rdw +
-        hs_gpt.alkalinePhosphatase * alkalinePhosphatase +
+        hs_gpt.alkaline * alkaline +
         hs_gpt.whiteBloodCells * whiteBloodCells;
     }
 
     function calculatePhenotypicAgePapper(chronologicalAge) {
-      // Lấy giá trị của các input
       let dob = $("#dob").val(); // Lấy giá trị ngày sinh
       let bloodTestDate = $("#blood-test-date").val(); // Lấy giá trị ngày xét nghiệm máu
 
-      let albumin = $("#albumin").val(); // Lấy giá trị Albumin
-      let creatinine = $("#creatinine").val(); // Lấy giá trị Creatinine
-      let glucose = $("#glucose").val(); // Lấy giá trị Glucose
-      let crp = $("#crp").val(); // Lấy giá trị C-reactive Protein (CRP)
-      let lymphs = $("#lymphs").val(); // Lấy giá trị Lymphocyte (Lymphs)
-      let mcv = $("#mcv").val(); // Lấy giá trị Mean Cell Volume (MCV)
-      let rdw = $("#rdw").val(); // Lấy giá trị Red Cell Distribution Width (RDW)
-      let alkalinePhosphatase = $("#alkaline-phosphatase").val(); // Lấy giá trị Alkaline Phosphatase
-      let whiteBloodCells = $("#wbc").val(); // Lấy giá trị White Blood Cells
+      // Lấy giá trị của các input
+      let albumin = toOriginal($("#albumin").val()); // Lấy giá trị Albumin
+      let creatinine = toOriginal($("#creatinine").val()); // Lấy giá trị Creatinine
+      let glucose = toOriginal($("#glucose").val()); // Lấy giá trị Glucose
+      let crp = toOriginal($("#crp").val()); // Lấy giá trị C-reactive Protein (CRP)
+      let lymphs = toOriginal($("#lymphs").val()); // Lấy giá trị Lymphocyte (Lymphs)
+      let mcv = toOriginal($("#mcv").val()); // Lấy giá trị Mean Cell Volume (MCV)
+      let rdw = toOriginal($("#rdw").val()); // Lấy giá trị Red Cell Distribution Width (RDW)
+      let alkaline = toOriginal($("#alkaline").val()); // Lấy giá trị Alkaline Phosphatase
+      let whiteBloodCells = toOriginal($("#wbc").val()); // Lấy giá trị White Blood Cells
 
       let xb = hs_papper.alpha +
         hs_papper.albumin * albumin +
@@ -350,7 +389,7 @@
         hs_papper.lymphs * lymphs +
         hs_papper.mcv * mcv +
         hs_papper.rdw * rdw +
-        hs_papper.alkalinePhosphatase * alkalinePhosphatase +
+        hs_papper.alkaline * alkaline +
         hs_papper.whiteBloodCells * whiteBloodCells +
         hs_papper.chronologicalAge * chronologicalAge;
 
@@ -360,6 +399,46 @@
       let tuoiSinhHoc = 141.50 + (Math.log(-0.00553 * Math.log(Math.exp(exp_term)))) / 0.09165;
 
       return tuoiSinhHoc;
+    }
+
+    function validate(id) {
+      let min = parseFloat($(`#${id}`).attr('min'));
+      let max = parseFloat($(`#${id}`).attr('max'));
+      let value = parseFloat(toOriginal($(`#${id}`).val()));
+      if (value != '' || value > 0) {
+        if (value >= min && value <= max) {
+          $(`#${id}_danger`).addClass('d-none')
+        } else {
+          $(`#${id}_danger`).html('Chỉ được nhập vào giá trị trong khoảng ' + min + '-' + max);
+          $(`#${id}_danger`).removeClass('d-none')
+        }
+      }
+    }
+
+    function toOriginal(formattedNumber) {
+      return formattedNumber.replace(/[^\d.-]/g, '');
+    }
+
+    function formatNumber(number) {
+      number = toOriginal(number)
+      var parts = number.split(".");
+      var integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      var decimalPart = parts[1];
+      if (isNaN(integerPart.replace(/[^\d.]/g, ''))) {
+        return '';
+      } else {
+        switch (decimalPart) {
+          case undefined:
+            return integerPart;
+            break;
+          case '':
+            return integerPart + ".";
+            break;
+          default:
+            return integerPart + '.' + decimalPart;
+            break;
+        }
+      }
     }
   </script>
 </body>
