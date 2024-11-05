@@ -20,14 +20,13 @@
       <form id="biological-age-form" class="row g-3">
         <div class="col-md-6">
           <label for="dob" class="form-label">DATE OF BIRTH</label>
-          <input type="date" id="dob" name="dob" value="1996-08-31" class="form-control" required />
+          <input type="date" id="dob" name="dob" value="1954-09-27" class="form-control" required />
         </div>
 
-        <!-- <div class="col-md-6">
+        <div class="col-md-6">
           <label for="blood-test-date" class="form-label">DATE OF BLOOD TEST</label>
-          <input type="date" id="blood-test-date" name="blood-test-date" value="2024-10-17" class="form-control"
-            required />
-        </div> -->
+          <input type="date" id="blood-test-date" name="blood-test-date" class="form-control" required />
+        </div>
 
         <h2 class="mt-4 mb-3">BLOOD TEST RESULTS</h2>
 
@@ -36,7 +35,7 @@
           <label for="albumin" class="form-label"> Albumin </label>
           <small id="hs_albumin">(-0.0336)</small>
           <div class="input-group">
-            <input type="text" min="2" max="7" id="albumin" name="albumin" value="4.3" step="0.1"
+            <input type="text" min="2" max="7" id="albumin" name="albumin" value="4.6" step="0.1"
               class="form-control number-input" />
             <span class="input-group-text">g/dL</span>
           </div>
@@ -48,7 +47,7 @@
           <label for="creatinine" class="form-label">Creatinine</label>
           <small id="hs_creatinine">(0.0095)</small>
           <div class="input-group">
-            <input type="text" min="0.2" max="2" id="creatinine" name="creatinine" value="1" step="0.1"
+            <input type="text" min="0.2" max="2" id="creatinine" name="creatinine" value="1.13" step="0.1"
               class="form-control number-input" />
             <span class="input-group-text">mg/dL</span>
           </div>
@@ -60,7 +59,7 @@
           <label for="glucose" class="form-label">Glucose</label>
           <small id="hs_glucose">(0.0190)</small>
           <div class="input-group">
-            <input type="text" min="40" max="300" id="glucose" name="glucose" value="95" step="1"
+            <input type="text" min="40" max="300" id="glucose" name="glucose" value="105" step="1"
               class="form-control number-input" />
             <span class="input-group-text">mg/dL</span>
           </div>
@@ -72,7 +71,7 @@
           <label for="crp" class="form-label">C-reactive Protein (CRP)</label>
           <small id="hs_crp">(0.0954)</small>
           <div class="input-group">
-            <input type="text" min="0" max="50" id="crp" name="crp" value="1" step="0.1"
+            <input type="text" min="0" max="50" id="crp" name="crp" value="0.15" step="0.1"
               class="form-control number-input" />
             <span class="input-group-text">mg/L</span>
           </div>
@@ -84,7 +83,7 @@
           <label for="lymphs" class="form-label">Lymphocyte (Lymphs)</label>
           <small id="hs_lymphs">(-0.0126)</small>
           <div class="input-group">
-            <input type="text" min="0" max="100" id="lymphs" name="lymphs" value="30" step="0.1"
+            <input type="text" min="0" max="100" id="lymphs" name="lymphs" value="24" step="0.1"
               class="form-control number-input" />
             <span class="input-group-text">%</span>
           </div>
@@ -96,7 +95,7 @@
           <label for="mcv" class="form-label">Mean Cell Volume (MCV)</label>
           <small id="hs_mcv">(0.0260)</small>
           <div class="input-group">
-            <input type="text" min="70" max="120" id="mcv" name="mcv" value="90" step="1"
+            <input type="text" min="70" max="120" id="mcv" name="mcv" value="94.2" step="1"
               class="form-control number-input" />
             <span class="input-group-text">fL</span>
           </div>
@@ -108,7 +107,7 @@
           <label for="rdw" class="form-label">Red Cell Distribution Width (RDW)</label>
           <small id="hs_rdw">(0.3306)</small>
           <div class="input-group">
-            <input type="text" min="10" max="20" id="rdw" name="rdw" value="13.5" step="0.1"
+            <input type="text" min="10" max="20" id="rdw" name="rdw" value="15.2" step="0.1"
               class="form-control number-input" />
             <span class="input-group-text">%</span>
           </div>
@@ -120,7 +119,7 @@
           <label for="alkaline" class="form-label">Alkaline Phosphatase</label>
           <small id="hs_alkaline">(0.00188)</small>
           <div class="input-group">
-            <input type="text" min="0" max="200" id="alkaline" name="alkaline" value="75" step="1"
+            <input type="text" min="0" max="200" id="alkaline" name="alkaline" value="24" step="1"
               class="form-control number-input" />
             <span class="input-group-text">U/L</span>
           </div>
@@ -132,19 +131,19 @@
           <label for="wbc" class="form-label">White Blood Cells</label>
           <small id="hs_wbc">(0.0554)</small>
           <div class="input-group">
-            <input type="text" min="2" max="20" id="wbc" name="wbc" value="7" step="1"
+            <input type="text" min="2" max="20" id="wbc" name="wbc" value="6.9" step="1"
               class="form-control number-input" />
             <span class="input-group-text">cells/mL</span>
           </div>
           <i id="wbc_danger" class="text-danger view-danger d-none"></i>
         </div>
 
-        <!-- White Blood Cells -->
-        <div class="col-md-6">
+        <!-- Select Formula -->
+        <div class="col-md-6 d-none">
           <label for="wbc" class="form-label">Select Formula</label>
           <div class="input-group">
             <select class="form-control" name="formula" id="formula">
-              <option value="0">ChatGPT</option>
+              <!-- <option value="0">ChatGPT</option> -->
               <option value="1">Papper</option>
             </select>
           </div>
@@ -176,42 +175,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row col-lg-5 px-4">
-      <div class="col-lg-12">
-        <label for="blood-test-date" class="form-label">Phenotypic Age là gì</label>
-        <pre>
-  <b>Phenotypic Age</b> là một thước đo sinh học dựa trên các chỉ số sức
-  khỏe để ước lượng tuổi sinh học của một người, thay vì dựa trên tuổi
-  theo năm dương lịch (tuổi theo giấy khai sinh). Khái niệm này được
-  phát triển trong lĩnh vực lão khoa nhằm cung cấp một cách đo lường
-  chính xác hơn về sự lão hóa sinh lý.
-          </pre>
-      </div>
-      <div class="col-lg-12">
-        <label for="blood-test-date" class="form-label">Công thức tính tuổi Phenotypic Age</label>
-        <pre>Phenotypic Age = α + β1*biomarker1 + β2*biomarker2 + ... + βn*biomarkern </pre>
-      </div>
-      <div class="col-lg-12">
-        <label for="blood-test-date" class="form-label">Trong đó</label>
-        <ul>
-          <li>α là một hằng số.</li>
-          <li>β1, β2, ..., βn là các hệ số tương ứng với từng biomarker.</li>
-          <li>
-            biomarker1, biomarker2, ..., biomarkern là các giá trị của từng
-            chỉ số sinh học.
-          </li>
-        </ul>
-      </div>
-      <div class="col-lg-12">
-        <label for="blood-test-date" class="form-label">Giả định</label>
-        <ul>
-          <li>α (hằng số): <b>19.5</b></li>
-          <li>
-            Các hệ số giả định được viết ở bên cạnh tên các chỉ số sinh học
-          </li>
-        </ul>
-      </div>
-    </div> -->
   </div>
 
 
@@ -223,7 +186,7 @@
 
   <!-- Custom Script -->
   <script>
-
+    document.getElementById('blood-test-date').valueAsDate = new Date();
     let hs_gpt = {
       'alpha': 19.5,
       'albumin': -0.0336,
@@ -237,17 +200,23 @@
       'whiteBloodCells': 0.0554,
     };
     let hs_papper = {
-      'alpha': -19.907,
+      'alpha': -19.9067,
       'albumin': -0.0336,
       'creatinine': 0.0095,
       'glucose': 0.1953,
       'crp': 0.0954,
-      'lymphs': -0.0120,
+      'lymphs': -0.012,
       'mcv': 0.0268,
       'rdw': 0.3306,
-      'alkaline': 0.00188,
+      'alkaline': 0.0019,
       'whiteBloodCells': 0.0554,
       'chronologicalAge': 0.0804,
+    };
+    let hs_cv = {
+      'albumin': 10,
+      'creatinine': 88.4,
+      'glucose': 0.05555,
+      'crp': 0.1,
     };
 
     $(document).ready(function () {
@@ -323,21 +292,30 @@
 
     function calculateChronologicalAge() {
       let birthDate = $("#dob").val();
-      const today = new Date(); // Lấy ngày hiện tại
+      let testDate = $("#blood-test-date").val();
+      const today = new Date(testDate); // Lấy ngày hiện tại
       const birth = new Date(birthDate); // Chuyển đổi birthDate sang kiểu Date
 
-      let age = today.getFullYear() - birth.getFullYear(); // Tính tuổi
-      const monthDifference = today.getMonth() - birth.getMonth(); // Tính sự khác biệt tháng
+      // Tính tuổi theo năm, tháng, và ngày
+      let years = today.getFullYear() - birth.getFullYear();
+      let months = today.getMonth() - birth.getMonth();
+      let days = today.getDate() - birth.getDate();
 
-      // Nếu tháng hiện tại chưa đến tháng sinh hoặc tháng hiện tại là tháng sinh nhưng chưa đến ngày sinh, giảm tuổi đi 1
-      if (
-        monthDifference < 0 ||
-        (monthDifference === 0 && today.getDate() < birth.getDate())
-      ) {
-        age--;
+      // Điều chỉnh nếu tháng hoặc ngày là âm
+      if (days < 0) {
+        months -= 1;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); // Lấy số ngày của tháng trước
+      }
+      if (months < 0) {
+        years -= 1;
+        months += 12;
       }
 
-      return age;
+      // Chuyển tháng và ngày thành dạng thập phân
+      const age = years + (months / 12) + (days / 365.25);
+
+      // Làm tròn kết quả với 2 chữ số thập phân
+      return parseFloat(age);
     }
 
     function calculatePhenotypicAgeGPT() {
@@ -367,8 +345,6 @@
     }
 
     function calculatePhenotypicAgePapper(chronologicalAge) {
-      let dob = $("#dob").val(); // Lấy giá trị ngày sinh
-      let bloodTestDate = $("#blood-test-date").val(); // Lấy giá trị ngày xét nghiệm máu
 
       // Lấy giá trị của các input
       let albumin = toOriginal($("#albumin").val()); // Lấy giá trị Albumin
@@ -382,10 +358,10 @@
       let whiteBloodCells = toOriginal($("#wbc").val()); // Lấy giá trị White Blood Cells
 
       let xb = hs_papper.alpha +
-        hs_papper.albumin * albumin +
-        hs_papper.creatinine * creatinine +
-        hs_papper.glucose * glucose +
-        hs_papper.crp * crp +
+        hs_papper.albumin * albumin * hs_cv.albumin +
+        hs_papper.creatinine * creatinine * hs_cv.creatinine +
+        hs_papper.glucose * glucose * hs_cv.glucose +
+        hs_papper.crp * ln(crp * hs_cv.crp) +
         hs_papper.lymphs * lymphs +
         hs_papper.mcv * mcv +
         hs_papper.rdw * rdw +
@@ -393,12 +369,29 @@
         hs_papper.whiteBloodCells * whiteBloodCells +
         hs_papper.chronologicalAge * chronologicalAge;
 
-      // Tính exp_term
-      let exp_term = (-1.51714 * Math.exp(xb)) / 0.0076927;
-      // Tính tuổi sinh học theo công thức
-      let tuoiSinhHoc = 141.50 + (Math.log(-0.00553 * Math.log(Math.exp(exp_term)))) / 0.09165;
+      let MortScore = 1 - exp(-exp(xb) * (exp(0.0076927 * 120) - 1) / 0.0076927);
+      let PtypicAge = 141.50225 + (ln(-0.00553 * ln(1 - MortScore))) / 0.09165;
+      let tuoiSinhHoc = PtypicAge / (1 + 1.28047 * exp(0.0344329 * (-182.344 + PtypicAge)));
 
+      console.log(hs_papper.alpha,
+        hs_papper.albumin * albumin * hs_cv.albumin,
+        hs_papper.creatinine * creatinine * hs_cv.creatinine,
+        hs_papper.glucose * glucose * hs_cv.glucose,
+        hs_papper.crp * ln(crp * hs_cv.crp),
+        hs_papper.lymphs * lymphs,
+        hs_papper.mcv * mcv,
+        hs_papper.rdw * rdw,
+        hs_papper.alkaline * alkaline,
+        hs_papper.whiteBloodCells * whiteBloodCells,
+        hs_papper.chronologicalAge * chronologicalAge);
       return tuoiSinhHoc;
+    }
+
+    function exp(params) {
+      return Math.exp(params);
+    }
+    function ln(params) {
+      return Math.log(params);
     }
 
     function validate(id) {
