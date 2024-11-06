@@ -139,12 +139,12 @@
         </div>
 
         <!-- Select Formula -->
-        <div class="col-md-6 d-none">
+        <div class="col-md-6">
           <label for="wbc" class="form-label">Select Formula</label>
           <div class="input-group">
             <select class="form-control" name="formula" id="formula">
-              <!-- <option value="0">ChatGPT</option> -->
-              <option value="1">Papper</option>
+              <option value="1">Sheet</option>
+              <option value="0">Papper</option>
             </select>
           </div>
         </div>
@@ -240,10 +240,10 @@
 
         switch (formula) {
           case 0:
-            phenotypicAge = calculatePhenotypicAgeGPT();
+            phenotypicAge = calculatePhenotypicAgePapper(chronologicalAge);
             break;
           case 1:
-            phenotypicAge = calculatePhenotypicAgePapper(chronologicalAge);
+            phenotypicAge = calculatePhenotypicAgeSheet(chronologicalAge);
             break;
           default:
             break;
@@ -344,7 +344,7 @@
         hs_gpt.whiteBloodCells * whiteBloodCells;
     }
 
-    function calculatePhenotypicAgePapper(chronologicalAge) {
+    function calculatePhenotypicAgeSheet(chronologicalAge) {
 
       // Lấy giá trị của các input
       let albumin = toOriginal($("#albumin").val()); // Lấy giá trị Albumin
@@ -387,6 +387,37 @@
       return tuoiSinhHoc;
     }
 
+    function calculatePhenotypicAgePapper(chronologicalAge) {
+      // Lấy giá trị của các input
+      let albumin = toOriginal($("#albumin").val()); // Lấy giá trị Albumin
+      let creatinine = toOriginal($("#creatinine").val()); // Lấy giá trị Creatinine
+      let glucose = toOriginal($("#glucose").val()); // Lấy giá trị Glucose
+      let crp = toOriginal($("#crp").val()); // Lấy giá trị C-reactive Protein (CRP)
+      let lymphs = toOriginal($("#lymphs").val()); // Lấy giá trị Lymphocyte (Lymphs)
+      let mcv = toOriginal($("#mcv").val()); // Lấy giá trị Mean Cell Volume (MCV)
+      let rdw = toOriginal($("#rdw").val()); // Lấy giá trị Red Cell Distribution Width (RDW)
+      let alkaline = toOriginal($("#alkaline").val()); // Lấy giá trị Alkaline Phosphatase
+      let whiteBloodCells = toOriginal($("#wbc").val()); // Lấy giá trị White Blood Cells
+
+      let xb = hs_papper.alpha +
+        hs_papper.albumin * albumin +
+        hs_papper.creatinine * creatinine +
+        hs_papper.glucose * glucose +
+        hs_papper.crp * crp +
+        hs_papper.lymphs * lymphs +
+        hs_papper.mcv * mcv +
+        hs_papper.rdw * rdw +
+        hs_papper.alkaline * alkaline +
+        hs_papper.whiteBloodCells * whiteBloodCells +
+        hs_papper.chronologicalAge * chronologicalAge;
+
+      // Tính exp_term
+      let exp_term = (-1.51714 * Math.exp(xb)) / 0.0076927;
+      // Tính tuổi sinh học theo công thức
+      let tuoiSinhHoc = 141.50 + (Math.log(-0.00553 * Math.log(Math.exp(exp_term)))) / 0.09165;
+
+      return tuoiSinhHoc;
+    }
     function exp(params) {
       return Math.exp(params);
     }
