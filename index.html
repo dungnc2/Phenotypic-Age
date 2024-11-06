@@ -400,10 +400,10 @@
       let whiteBloodCells = toOriginal($("#wbc").val()); // Lấy giá trị White Blood Cells
 
       let xb = hs_papper.alpha +
-        hs_papper.albumin * albumin +
-        hs_papper.creatinine * creatinine +
-        hs_papper.glucose * glucose +
-        hs_papper.crp * crp +
+        hs_papper.albumin * albumin * hs_cv.albumin +
+        hs_papper.creatinine * creatinine * hs_cv.creatinine +
+        hs_papper.glucose * glucose * hs_cv.glucose +
+        hs_papper.crp * ln(crp * hs_cv.crp) +
         hs_papper.lymphs * lymphs +
         hs_papper.mcv * mcv +
         hs_papper.rdw * rdw +
